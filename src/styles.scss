@@ -1,1 +1,15 @@
-/* You can add global styles to this file, and also import other style files */
+@import "assets/bootstrap.min.css";
+@import "~font-awesome/css/font-awesome.css";
+
+html, body {
+  min-height: 100vh;
+}
+
+.trash-icon {
+  font-size: 1.2em;
+}
+
+.trash-icon:hover {
+  color: #dc3545;
+  cursor: pointer;
+}

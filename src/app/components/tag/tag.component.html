@@ -1,0 +1,92 @@
+<ol class="breadcrumb">
+  <li class="breadcrumb-item"><a [routerLink]="'/repositories'">Repositories</a></li>
+  <li class="breadcrumb-item active">{{ repo }}</li>
+  <li class="breadcrumb-item"><a [routerLink]="['/repositories', repo, name]">{{ name }}</a></li>
+  <li class="breadcrumb-item active">{{ tag }}</li>
+  <a style="flex-grow: 1; text-align: right" [routerLink]="['/logout']">Logout</a>
+</ol>
+
+<div class="container">
+  <div class="d-flex w-100 justify-content-between">
+    <div class="head">
+      <div class="title">{{ repo }}/{{ name }}:{{ tag }}</div>
+      <small>Last pushed, {{ lastPushed }}</small>
+    </div>
+    <div class="size d-flex flex-column align-items-end">
+      <div class="total-size">{{ size / 1024 / 1024 | number: '1.0-0' }} MB</div>
+      <small class="size-description">compressed size</small>
+    </div>
+  </div>
+
+  <div class="spacer"></div>
+
+  <div class="title">Environments</div>
+  <div class="prop" *ngFor="let env of data?.config?.Env">
+    <small class="label">{{ env.split('=')[0] }}</small>
+    <small class="value">{{ env.split('=')[1] }}</small>
+  </div>
+
+  <div class="spacer"></div>
+
+  <div class="title">Labels</div>
+  <!--<div class="label" *ngFor="let label of Object.keys(data?.config?.Labels)">
+    <small>{{ label }}</small>
+  </div>-->
+
+  <div class="spacer"></div>
+
+  <div class="title">General</div>
+
+  <div class="prop">
+    <small class="label">Command</small>
+    <small class="value">{{ data?.config.Cmd.join(' ') }}</small>
+  </div>
+
+  <div class="prop">
+    <small class="label">Entrypoint</small>
+    <small class="value">{{ data?.config.Entrypoint || '-' }}</small>
+  </div>
+
+  <div class="prop">
+    <small class="label">Workdir</small>
+    <small class="value">{{ data?.config.Workdir || '-' }}</small>
+  </div>
+
+  <div class="prop">
+    <small class="label">User</small>
+    <small class="value">{{ data?.config.User || '-' }}</small>
+  </div>
+
+  <div class="prop">
+    <small class="label">OS</small>
+    <small class="value">{{ data?.os }}</small>
+  </div>
+
+  <div class="prop">
+    <small class="label">Architecture</small>
+    <small class="value">{{ data?.architecture }}</small>
+  </div>
+
+  <div class="prop">
+    <small class="label">Docker version</small>
+    <small class="value">{{ data?.docker_version }}</small>
+  </div>
+
+  <!--<div class="title">{{ histories?.length }} Layers</div>
+  <ul class="list-group">
+    <li class="list-group-item" *ngFor="let history of histories">
+      <div class="d-flex justify-content-between">
+        <div class="d-flex flex-column">
+          <small>{{ history.id }}</small>
+          <small>{{ history.container_config.Cmd }}</small>
+        </div>
+
+        <div>{{ history.size / 1024 / 1024 | number }} MB</div>
+      </div>
+    </li>
+  </ul>-->
+
+</div>
+
+
+
