@@ -4,11 +4,14 @@ pipeline:
     group: build
     repo: no0dles/angular-docker-registry
     dry_run: true
-    pull_image: true
+    when:
+      event:
+        exclude: [ tag ]
 
   publish:
     image: plugins/docker
     repo: no0dles/angular-docker-registry
     tags: ["latest", "${DRONE_TAG}"]
+    secrets: [ docker_username, docker_password ]
     when:
       event: tag
