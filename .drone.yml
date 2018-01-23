@@ -1,0 +1,21 @@
+pipeline:
+  build:
+    image: node:8.4.0
+    group: build
+    commands:
+      - yarn install
+      - yarn build
+
+  build_image:
+    image: plugins/docker
+    group: build
+    repo: no0dles/angular-docker-registry
+    dry_run: true
+    pull_image: true
+
+  publish_image:
+    image: plugins/docker
+    repo: no0dles/angular-docker-registry
+    tags: ["latest"] #"${DRONE_TAG}",
+    #when:
+    #  event: tagpro:node-autoscout24-bot pascal$

@@ -1,0 +1,62 @@
+<ol class="breadcrumb">
+  <li class="breadcrumb-item"><a [routerLink]="'/repositories'">Repositories</a></li>
+  <li class="breadcrumb-item active">{{ repo }}</li>
+  <li class="breadcrumb-item"><a [routerLink]="['/repositories', repo, name]">{{ name }}</a></li>
+  <li class="breadcrumb-item active">{{ tag }}</li>
+  <a style="flex-grow: 1; text-align: right" [routerLink]="['/logout']">Logout</a>
+</ol>
+
+<div class="container">
+  <div class="d-flex w-100 justify-content-between">
+    <div class="head">
+      <div class="title">{{ repo }}/{{ name }}:{{ tag }}</div>
+      <small class="light-text">Last pushed, {{ lastPushed }}</small>
+    </div>
+    <div class="size d-flex flex-column align-items-end">
+      <div class="total-size">{{ size / 1024 / 1024 | number: '1.0-0' }} MB</div>
+      <small class="size-description light-text">compressed size</small>
+    </div>
+  </div>
+</div>
+
+<div class="spacer"></div>
+
+<div class="container">
+  <app-environments [environments]="data?.config?.Env"></app-environments>
+</div>
+
+<div class="spacer"></div>
+
+<div class="container">
+  <app-labels [labels]="data?.config?.Labels"></app-labels>
+</div>
+
+<div class="spacer"></div>
+
+<div class="container">
+  <div class="title">General</div>
+
+  <app-property label="Command" [value]="data?.config.Cmd.join(' ')"></app-property>
+  <app-property label="Entrypoint" [value]="data?.config.Entrypoint"></app-property>
+  <app-property label="Workdir" [value]="data?.config.Workdir"></app-property>
+  <app-property label="User" [value]="data?.config.User"></app-property>
+  <app-property label="OS" [value]="data?.os"></app-property>
+  <app-property label="Architecture" [value]="data?.architecture"></app-property>
+  <app-property label="Docker version" [value]="data?.docker_version"></app-property>
+</div>
+<!--<div class="title">{{ histories?.length }} Layers</div>
+<ul class="list-group">
+  <li class="list-group-item" *ngFor="let history of histories">
+    <div class="d-flex justify-content-between">
+      <div class="d-flex flex-column">
+        <small>{{ history.id }}</small>
+        <small>{{ history.container_config.Cmd }}</small>
+      </div>
+
+      <div>{{ history.size / 1024 / 1024 | number }} MB</div>
+    </div>
+  </li>
+</ul>-->
+
+
+

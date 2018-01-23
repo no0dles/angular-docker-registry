@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from './services/auth.service';
+import {Angulartics2GoogleAnalytics} from 'angulartics2/ga';
 
 @Component({
   selector: 'app-root',
@@ -7,7 +8,8 @@ import {AuthService} from './services/auth.service';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  constructor(private auth: AuthService) {
+  constructor(private auth: AuthService,
+              angulartics2GoogleAnalytics: Angulartics2GoogleAnalytics) {
 
   }
 
