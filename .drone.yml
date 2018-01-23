@@ -16,6 +16,6 @@ pipeline:
   publish_image:
     image: plugins/docker
     repo: no0dles/angular-docker-registry
-    tags: ["latest"] #"${DRONE_TAG}",
+    tags: ["latest", "0.0.${DRONE_TAG}"]
     #when:
     #  event: tagpro:node-autoscout24-bot pascal$
