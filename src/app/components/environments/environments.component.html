@@ -1,0 +1,6 @@
+<div class="title">Environments</div>
+<app-property [label]="getLabel(env)"
+              [value]="getValue(env)"
+              *ngFor="let env of environments">
+</app-property>
+<small class="light-text" *ngIf="!environments || environments.length === 0">No environments</small>
