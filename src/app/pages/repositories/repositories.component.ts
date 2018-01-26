@@ -9,13 +9,16 @@ import {RepositoryModel} from '../../models/repository.model';
   styleUrls: ['./repositories.component.scss'],
 })
 export class RepositoriesComponent implements OnInit {
-  repos$: Observable<RepositoryModel[]>;
+  loading = true;
+  repos: RepositoryModel[];
 
   constructor(private registry: RegistryService) {
   }
 
   ngOnInit() {
-    this.repos$ = this.registry.getRepositories();
+    this.registry.getRepositories().subscribe(repos => {
+      this.repos = repos;
+      this.loading = false;
+    });
   }
-
 }

@@ -13,7 +13,8 @@ export class RepositoryComponent implements OnInit {
   repo: string;
   name: string;
 
-  tags$: Observable<string[]>;
+  loading = true;
+  tags: string[];
 
   constructor(private route: ActivatedRoute,
               private registry: RegistryService) {
@@ -28,7 +29,10 @@ export class RepositoryComponent implements OnInit {
   }
 
   loadTags() {
-    this.tags$ = this.registry.getTags(this.repo, this.name);
+    this.registry.getTags(this.repo, this.name).subscribe(tags => {
+      this.tags = tags;
+      this.loading = false;
+    });
   }
 
   delete(event: MouseEvent, tag: string) {

@@ -2,21 +2,18 @@ import {Injectable} from '@angular/core';
 
 @Injectable()
 export class AuthService {
-  registry: string;
+  registryUrl: string;
   username: string;
   password: string;
 
   load() {
-    this.registry = localStorage.getItem('registry');
+    this.registryUrl = localStorage.getItem('registryUrl');
     this.username = localStorage.getItem('username');
     this.password = localStorage.getItem('password');
   }
 
   save(registry: string, username: string, password: string) {
-    if (registry && !registry.startsWith('http')) {
-      registry = `https://${registry}`;
-    }
-    localStorage.setItem('registry', registry);
+    localStorage.setItem('registryUrl', registry);
     localStorage.setItem('username', username);
     localStorage.setItem('password', password);
     this.load();
@@ -27,13 +24,16 @@ export class AuthService {
   }
 
   isAuthenticated() {
-    return this.registry && this.registry.length > 0 && this.registry !== 'undefined' &&
+    return this.registryUrl && this.registryUrl.length > 0 && this.registryUrl !== 'undefined' &&
       this.username && this.username.length > 0 && this.username !== 'undefined' &&
       this.password && this.password.length > 0 && this.password !== 'undefined';
   }
 
-  getBasicAuthBearer() {
-    const auth = btoa(`${this.username}:${this.password}`);
-    return `Basic ${auth}`;
+  getBasicAuthBearer(auth?: { username: string, password: string }) {
+    if (!auth) {
+      auth = {username: this.username, password: this.password};
+    }
+    const bearer = btoa(`${auth.username}:${auth.password}`);
+    return `Basic ${bearer}`;
   }
 }

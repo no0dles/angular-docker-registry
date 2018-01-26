@@ -1,10 +1,10 @@
-<div class="login-container d-flex align-items-center justify-content-center">
+<div class="login-container d-flex flex-column align-items-center justify-content-center">
   <div class="card login-card">
     <div class="card-body">
       <h5 class="card-title">Login</h5>
       <div class="form-group">
         <label for="registry">Registry</label>
-        <input type="text" class="form-control form-control-sm" [(ngModel)]="registry" id="registry">
+        <input type="text" class="form-control form-control-sm" [(ngModel)]="registryUrl" id="registry">
       </div>
       <div class="form-group">
         <label for="username">Username</label>
@@ -14,9 +14,17 @@
         <label for="password">Password</label>
         <input type="password" class="form-control form-control-sm" [(ngModel)]="password" id="password">
       </div>
-      <button class="btn btn-primary" (click)="login()">Log In</button>
+      <button class="btn btn-primary btn-block float-right" [disabled]="loggingIn" (click)="login()">Log In</button>
+    </div>
+  </div>
+
+  <div class="alert-container">
+    <div class="login-alert alert alert-danger" *ngIf="loggedIn && !success" role="alert">
+      <i class="fa fa-exclamation-triangle"></i>
+      Login was incorrect
     </div>
   </div>
 </div>
+
 
 

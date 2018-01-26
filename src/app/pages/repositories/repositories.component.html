@@ -3,17 +3,20 @@
   <a style="flex-grow: 1; text-align: right" [routerLink]="['/logout']">Logout</a>
 </ol>
 
+
 <div class="container">
   <div class="list-group">
     <a [routerLink]="[repo.repo, repo.name]"
        class="list-group-item list-group-item-action flex-column align-items-start"
-       *ngFor="let repo of repos$ | async">
+       *ngFor="let repo of repos">
       <div class="d-flex w-100 justify-content-between align-items-center">
         <h5 class="mb-1">{{ repo.repo }} / {{ repo.name }}</h5>
       </div>
     </a>
 
-    <div *ngIf="(repos$ | async)?.length === 0" class="list-group-item list-group-item-action flex-column align-items-start">
+    <app-spinner *ngIf="loading"></app-spinner>
+
+    <div *ngIf="repos?.length === 0" class="list-group-item list-group-item-action flex-column align-items-start">
       <div class="d-flex w-100 justify-content-between align-items-center">
         <h5 class="mb-1">No repositories</h5>
       </div>

@@ -9,14 +9,16 @@
   <div class="list-group">
     <a [routerLink]="['tag', tag]"
        class="list-group-item list-group-item-action flex-column align-items-start"
-       *ngFor="let tag of tags$ | async">
+       *ngFor="let tag of tags">
       <div class="d-flex w-100 justify-content-between align-items-center">
         <h5 class="mb-1">{{ tag }}</h5>
         <i class="fa fa-trash-o trash-icon" (click)="delete($event, tag)"></i>
       </div>
     </a>
 
-    <div *ngIf="(tags$ | async)?.length === 0" class="list-group-item list-group-item-action flex-column align-items-start">
+    <app-spinner *ngIf="loading"></app-spinner>
+
+    <div *ngIf="!loading && tags?.length === 0" class="list-group-item list-group-item-action flex-column align-items-start">
       <div class="d-flex w-100 justify-content-between align-items-center">
         <h5 class="mb-1">No tags</h5>
       </div>

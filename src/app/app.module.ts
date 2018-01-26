@@ -21,6 +21,7 @@ import { LabelsComponent } from './components/labels/labels.component';
 import { EnvironmentsComponent } from './components/environments/environments.component';
 import {Angulartics2GoogleAnalytics} from 'angulartics2/ga';
 import {Angulartics2Module} from 'angulartics2';
+import { SpinnerComponent } from './components/spinner/spinner.component';
 
 
 @NgModule({
@@ -35,6 +36,7 @@ import {Angulartics2Module} from 'angulartics2';
     PropertyComponent,
     LabelsComponent,
     EnvironmentsComponent,
+    SpinnerComponent,
   ],
   imports: [
     FormsModule,
